@@ -27,6 +27,20 @@ Todo el trabajo está en [TP_Integrador.ipynb](TP_Integrador.ipynb):
 
 ## Cómo correrlo
 
+Crear y activar un entorno virtual:
+
+```bash
+# Windows (PowerShell)
+python -m venv venv
+venv\Scripts\Activate.ps1
+
+# macOS / Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Instalar las dependencias y abrir el notebook:
+
 ```bash
 pip install -r requirements.txt
 jupyter notebook TP_Integrador.ipynb
