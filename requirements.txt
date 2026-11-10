@@ -1,7 +1,12 @@
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
+# Versiones con las que se ejecutó el notebook completo (Python 3.10.11).
+# NumPy 1.26.4 requiere Python 3.10, 3.11 o 3.12.
+pandas==2.2.3
+numpy==1.26.4
+matplotlib==3.10.0
+seaborn==0.13.2
+scikit-learn==1.6.0
+ipython==8.27.0
+ipykernel==6.29.5
+
+# Interfaz para abrir el notebook (no afecta los resultados)
 jupyter
-ipython
