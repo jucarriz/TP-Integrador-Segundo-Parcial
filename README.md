@@ -58,31 +58,86 @@ El modelo explica alrededor de un tercio de la variabilidad del `cgpa`. Tiende a
 
 ## Cómo correrlo
 
-Se necesita **Python 3.10, 3.11 o 3.12** (la versión de NumPy fijada en `requirements.txt` no funciona con Python 3.13 o más nuevo).
+### 1. Verificar la versión de Python
 
-Crear y activar un entorno virtual:
+Se necesita **Python 3.10, 3.11 o 3.12**: la versión de NumPy fijada en `requirements.txt` no funciona con Python 3.13 o más nuevo.
 
 ```bash
-# Windows (PowerShell)
+# Windows
+python --version
+
+# macOS / Linux
+python3 --version
+```
+
+Si la versión es 3.13 o más nueva, hay que instalar Python 3.12 desde [python.org](https://www.python.org/downloads/). En Windows se pueden tener varias versiones a la vez y elegir cuál usar con `py -3.12` (ver paso 3).
+
+### 2. Clonar el repositorio
+
+```bash
+git clone https://github.com/jucarriz/TP-Integrador-Segundo-Parcial.git
+cd TP-Integrador-Segundo-Parcial
+```
+
+### 3. Crear el entorno virtual
+
+```bash
+# Windows
 python -m venv venv
-venv\Scripts\Activate.ps1
+# o, si hay varias versiones de Python instaladas:
+py -3.12 -m venv venv
 
 # macOS / Linux
 python3 -m venv venv
+```
+
+### 4. Activar el entorno virtual
+
+```bash
+# Windows (PowerShell)
+venv\Scripts\Activate.ps1
+
+# Windows (cmd)
+venv\Scripts\activate.bat
+
+# macOS / Linux
 source venv/bin/activate
 ```
 
-Instalar las dependencias y abrir el notebook:
+**Si PowerShell muestra el error *"la ejecución de scripts está deshabilitada en este sistema"*** (es habitual en PCs corporativas), ejecutar primero este comando y volver a activar el entorno. Solo afecta a esa terminal y no cambia la configuración de la PC:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+venv\Scripts\Activate.ps1
+```
+
+El entorno está activo cuando aparece `(venv)` al principio de la línea de la terminal. Para salir del entorno: `deactivate`.
+
+### 5. Instalar las dependencias
+
+Con el entorno activo:
 
 ```bash
 pip install -r requirements.txt
+```
+
+### 6. Abrir y ejecutar el notebook
+
+Para ver todos los resultados, hay que ejecutar el notebook completo desde el principio. Hay dos opciones:
+
+**Opción A: Jupyter**
+
+```bash
 jupyter notebook TP_Integrador.ipynb
 ```
 
-Para ver todos los resultados, ejecutar el notebook completo desde el principio:
+En el navegador: *Kernel → Restart Kernel and Run All Cells…*
 
-- **Jupyter Notebook 7 / JupyterLab:** *Kernel → Restart Kernel and Run All Cells…*
-- **VS Code:** botón *Restart* y después *Run All* en la barra del notebook.
+**Opción B: VS Code**
+
+1. Abrir la carpeta del repositorio (*File → Open Folder…*) y después `TP_Integrador.ipynb`.
+2. Elegir el kernel del entorno virtual: *Select Kernel* (arriba a la derecha) → *Python Environments* → `venv`. **Este paso es importante:** si no se elige, VS Code usa el Python global de la PC, sin las versiones fijadas en `requirements.txt`.
+3. En la barra del notebook: *Restart* y después *Run All*.
 
 El notebook se ejecutó de punta a punta, sin errores, con Python 3.10.11, pandas 2.2.3, NumPy 1.26.4, scikit-learn 1.6.0, matplotlib 3.10.0 y seaborn 0.13.2, que son las versiones fijadas en `requirements.txt`. Con otras versiones de las librerías, las métricas del modelo pueden variar en algunas centésimas.
 
