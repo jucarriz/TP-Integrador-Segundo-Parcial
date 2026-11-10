@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP-Integrador-Segundo-Parcial | Conclusiones</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hud">
+      <div>
+        <p class="label">Jugadora</p>
+        <h1>Katherine</h1>
+      </div>
+      <div class="hud-center">
+        <p class="label">Objetivo</p>
+      <p id="questLabel">Recorre las conclusiones del análisis</p>
+      </div>
+      <div class="hud-right">
+        <div>
+          <p class="label">Nivel</p>
+          <p id="worldLabel">Nivel 1</p>
+        </div>
+        <div>
+          <p class="label">Puntos</p>
+          <p id="coinLabel">0</p>
+        </div>
+        <div>
+          <p class="label">Intentos</p>
+          <p id="lifeLabel">INFINITAS</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="game-layout">
+      <section class="canvas-panel">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="Katty Quest game"></canvas>
+        <div class="scanlines"></div>
+      </section>
+
+      <aside class="story-panel story-panel-portrait-only" aria-label="Katty portrait">
+        <div class="portrait-shell portrait-shell-panel">
+          <img class="player-portrait" src="kattytech.png" alt="Katty Tech portrait">
+        </div>
+      </aside>
+    </main>
+
+    <footer class="controls-bar">
+      <button id="startButton" class="action-button" type="button">Iniciar</button>
+      <button id="restartButton" class="action-button secondary" type="button">Reiniciar recorrido</button>
+      <p class="control-help">A/D o flechas para moverte. W, flecha arriba o espacio para saltar. Avanza a la derecha para recorrer las conclusiones.</p>
+    </footer>
+
+    <div class="mobile-controls" aria-hidden="true">
+      <button class="mobile-button" data-control="left" type="button">IZQ.</button>
+      <button class="mobile-button" data-control="jump" type="button">SALTAR</button>
+      <button class="mobile-button" data-control="right" type="button">DER.</button>
+    </div>
+  </div>
+
+  <div class="overlay visible" id="introOverlay">
+    <div class="overlay-card intro-card">
+      <p class="label">Presentación del equipo</p>
+      <h2>TP-Integrador-Segundo-Parcial</h2>
+      <p>Conclusiones del trabajo práctico de Ciencia de Datos: ¿qué podemos aprender al intentar predecir el CGPA a partir de hábitos de sueño, pantallas y estilo de vida?</p>
+      <div class="overlay-grid">
+        <div>
+          <h3>Equipo de trabajo</h3>
+          <p>Tananta Tananta Katherine<br>Carrizo Juan Pablo<br>Pasta Francisco Agustín<br>Cirillo Matías Alejandro</p>
+        </div>
+        <div>
+          <h3>Jugadora</h3>
+          <p>Katherine Tananta Tananta<br>Un recorrido por los hallazgos, el desempeño del modelo, sus límites y posibles mejoras.</p>
+        </div>
+      </div>
+      <button id="overlayStartButton" class="action-button" type="button">Comenzar recorrido</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="storyOverlay">
+    <div class="overlay-card story-card">
+        <p class="label" id="overlayKicker">Conclusión desbloqueada</p>
+      <h2 id="overlayTitle">Titulo</h2>
+      <p id="overlayBody">Texto</p>
+      <div class="story-tags" id="overlayTags"></div>
+      <button id="continueButton" class="action-button" type="button">Continuar</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="bossOverlay">
+    <div class="overlay-card boss-dialog-card">
+      <p class="label" id="bossKicker">Reto del análisis</p>
+      <div class="boss-dialog-layout">
+        <div class="boss-bubble boss-bubble-square">
+          <p class="boss-line" id="bossLine">Dialogo</p>
+        </div>
+        <div class="portrait-shell boss-portrait-shell">
+          <img class="player-portrait boss-player-portrait" src="kattytech.png" alt="Katty Tech en dialogo boss">
+        </div>
+      </div>
+      <button id="bossContinueButton" class="action-button" type="button">Siguiente</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="endOverlay">
+    <div class="overlay-card end-card">
+      <div class="end-confetti" id="endConfetti" aria-hidden="true"></div>
+
+      <section class="end-step active" data-step="0">
+        <p class="label">CONCLUSIONES PRINCIPALES</p>
+        <h2>¿Qué aprendimos?</h2>
+        <div class="end-stack">
+          <p class="end-item">El sueño es el factor más asociado al CGPA</p>
+          <p class="end-item">Las pantallas no mejoraron la predicción</p>
+          <p class="end-item">La regresión lineal superó al baseline</p>
+          <p class="end-item">La predicción es parcial: R² = 0.34</p>
+        </div>
+      </section>
+
+      <section class="end-step" data-step="1">
+        <p class="label">LÍMITES DEL ANÁLISIS</p>
+        <h2>Interpretar con cuidado</h2>
+        <p class="end-next-level big">Asociación no implica causalidad</p>
+        <p>Los datos son sintéticos y el modelo no debe usarse para diagnosticar o etiquetar estudiantes.</p>
+      </section>
+
+      <section class="end-step end-final-step" data-step="2">
+        <p class="label">SIGUIENTE ITERACIÓN</p>
+        <h2>¿Cómo lo mejoraríamos?</h2>
+        <div class="end-character-display" aria-label="Katty ready for next level">
+          <div class="portrait-shell portrait-shell-end">
+            <img class="player-portrait end-player-portrait" src="kattytech.png" alt="Katty Tech lista para el siguiente nivel">
+          </div>
+        </div>
+        <p class="end-copy" id="endCopy">Validación repetida, Ridge y datos reales longitudinales.</p>
+      </section>
+
+      <section class="end-step end-question-step" data-step="3">
+        <p class="label">CIERRE DEL EQUIPO</p>
+        <h2>Gracias. ¿Preguntas?</h2>
+      </section>
+
+      <button id="playAgainButton" class="action-button" type="button">Siguiente</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
