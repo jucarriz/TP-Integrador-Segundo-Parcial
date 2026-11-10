@@ -2,7 +2,7 @@
 
 Trabajo práctico integrador de la materia **Python para Ciencia de Datos** (Licenciatura en Ciencias de Datos e IA, UADE). Modalidad grupal. Se entrega el notebook `.ipynb` junto con el dataset.
 
-Consigna completa: [TP Integrador · Segundo parcial.docx](<TP Integrador · Segundo parcial.docx>).
+Consigna completa: [TP Integrador · Segundo parcial.docx](<docs/TP Integrador · Segundo parcial.docx>).
 
 ## Integrantes
 
@@ -205,8 +205,9 @@ Limitación conocida: la imputación de nulos y el acotado de `weekly_study_hour
 .
 ├── data/
 │   └── student_sleep_screen_time_academic_performance.csv
+├── docs/
+│   └── TP Integrador · Segundo parcial.docx   # consigna
 ├── TP_Integrador.ipynb
 ├── requirements.txt
-├── TP Integrador · Segundo parcial.docx   # consigna
 └── README.md
 ```
