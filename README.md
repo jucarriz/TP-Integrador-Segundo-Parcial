@@ -22,8 +22,62 @@ Es un problema de **regresión**: `cgpa` es numérica continua, en escala de 0 a
 [Student Sleep, Screen Time & Academic Performance](https://www.kaggle.com/datasets/aamir28/student-sleep-screen-time-and-academic-performance) (Kaggle).
 
 - 500 estudiantes y 25 columnas, con variables numéricas (horas de sueño, uso de pantallas, asistencia, horas de estudio, `cgpa`, etc.) y categóricas (género, carrera, tipo de residencia, cronotipo, dispositivo principal, etc.).
+- Son **datos sintéticos**: según la descripción del autor en Kaggle, los registros fueron generados y no corresponden a estudiantes reales. Licencia CC0 (dominio público).
 - No tiene columnas de fecha, así que no corresponde una serie de tiempo.
 - Archivo: [data/student_sleep_screen_time_academic_performance.csv](data/student_sleep_screen_time_academic_performance.csv).
+
+## Cómo obtener el dataset
+
+**El CSV ya viene incluido en el repositorio**, en la carpeta `data/`. Si clonaste el repositorio (ver [Cómo correrlo](#cómo-correrlo)), no hace falta descargar nada.
+
+Si necesitás descargarlo de nuevo desde Kaggle, hay dos opciones. En las dos, el archivo tiene que quedar en `data/` con el nombre exacto `student_sleep_screen_time_academic_performance.csv`, porque el notebook lo busca así.
+
+### Opción A: descarga manual
+
+1. Entrar a la [página del dataset en Kaggle](https://www.kaggle.com/datasets/aamir28/student-sleep-screen-time-and-academic-performance) y apretar **Download** (puede pedir iniciar sesión).
+2. Se descarga un `.zip`: descomprimirlo.
+3. Copiar `student_sleep_screen_time_academic_performance.csv` a la carpeta `data/` del repositorio.
+
+### Opción B: con Python (`kagglehub`)
+
+No hace falta cuenta de Kaggle, porque el dataset es público. Con el entorno virtual activo, desde la carpeta del repositorio:
+
+```bash
+pip install kagglehub
+```
+
+Guardar este script como un archivo `.py` en la carpeta del repositorio (o pegarlo en una celda) y ejecutarlo:
+
+```python
+import shutil
+from pathlib import Path
+
+import kagglehub
+
+# Solo si aparece el error CERTIFICATE_VERIFY_FAILED (ver "Problemas comunes"):
+# import truststore; truststore.inject_into_ssl()
+
+DATASET = "aamir28/student-sleep-screen-time-and-academic-performance"
+ARCHIVO = "student_sleep_screen_time_academic_performance.csv"
+
+# Descarga el dataset a la caché de kagglehub y devuelve la carpeta
+carpeta = kagglehub.dataset_download(DATASET)
+
+# Copia el CSV a data/, donde lo busca el notebook
+Path("data").mkdir(exist_ok=True)
+shutil.copy(Path(carpeta) / ARCHIVO, Path("data") / ARCHIVO)
+print(f"CSV copiado en data/{ARCHIVO}")
+```
+
+> **Ojo con el script que muestra Kaggle en el botón *Code*:** trae `file_path = ""` y así falla. Si se quiere usar ese script, hay que completar `file_path = "student_sleep_screen_time_academic_performance.csv"` (y para esa variante se instala `pip install "kagglehub[pandas-datasets]"`).
+
+### Problemas comunes
+
+| Error | Causa | Solución |
+|---|---|---|
+| `ValueError: Unsupported file extension: ''` | Se usó el script de Kaggle con `file_path` vacío | Completar `file_path` con el nombre del CSV (ver arriba) |
+| `SSLError ... CERTIFICATE_VERIFY_FAILED` | Red corporativa con un proxy que intercepta HTTPS: Python no confía en su certificado | `pip install truststore` y descomentar la línea `import truststore; truststore.inject_into_ssl()` al principio del script, para que Python use los certificados de Windows |
+| `FileNotFoundError` al ejecutar el notebook | El CSV no está en `data/` o tiene otro nombre | Revisar que exista `data/student_sleep_screen_time_academic_performance.csv` |
 
 ## Contenido del notebook
 
@@ -55,6 +109,8 @@ Todo el trabajo está en [TP_Integrador.ipynb](TP_Integrador.ipynb):
 | Baseline (media) | 0.33 | 0.27 | 10.02 % | -0.05 |
 
 El modelo explica alrededor de un tercio de la variabilidad del `cgpa`. Tiende a predecir valores cercanos a la media: sobreestima a los estudiantes de rendimiento bajo y subestima a los de rendimiento alto. Por eso **no sirve para detectar estudiantes en riesgo**: a los de `cgpa` más bajo es justamente a quienes más sobreestima.
+
+**Alcance de los resultados:** como los datos son sintéticos, las relaciones que encontramos son las que tienen los datos generados. Sirven para aplicar y evaluar las técnicas del análisis, pero no permiten sacar conclusiones sobre estudiantes reales.
 
 ## Cómo correrlo
 
