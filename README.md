@@ -199,15 +199,28 @@ El notebook se ejecutó de punta a punta, sin errores, con Python 3.10.11, panda
 
 Limitación conocida: la imputación de nulos y el acotado de `weekly_study_hours` se calcularon con todo el dataset, antes de separar train y test (detalle en la sección 6.5 del notebook).
 
+## Presentación y conclusiones
+
+Además del notebook, el repositorio tiene dos archivos HTML para la exposición oral. No necesitan instalar nada: se abren con doble clic en cualquier navegador.
+
+- [presentacion.html](presentacion.html): presentación de 22 diapositivas con la carga y calidad de los datos, el EDA, las agregaciones y el modelo. Se navega con las flechas del teclado; con `F` pasa a pantalla completa y con `T` cambia el tema claro u oscuro.
+- [Conclusiones/index.html](Conclusiones/index.html): las conclusiones del trabajo (respuesta a la pregunta, hallazgos, desempeño del modelo, límites y mejoras) presentadas como un juego de plataformas. Se mueve con A/D o las flechas y se salta con W, la flecha arriba o la barra espaciadora.
+
 ## Estructura del repositorio
 
 ```
 .
+├── Conclusiones/                # conclusiones en formato juego (HTML, CSS y JS)
+│   ├── index.html
+│   ├── app.js
+│   ├── styles.css
+│   └── kattytech.png
 ├── data/
 │   └── student_sleep_screen_time_academic_performance.csv
 ├── docs/
 │   └── TP Integrador · Segundo parcial.docx   # consigna
 ├── TP_Integrador.ipynb
+├── presentacion.html            # presentación de la exposición
 ├── requirements.txt
 └── README.md
 ```
