@@ -1112,26 +1112,33 @@ function drawSky() {
 
 function drawSectionBanners() {
   worlds.forEach((world) => {
-    if (world.id === "codigo") {
-      return;
-    }
-
     const x = world.start - state.cameraX + 120;
-    if (x < -280 || x > WIDTH + 120) {
+    const label = `WORLD ${world.order + 1}`;
+    const labelFont = "bold 18px Lucida Console";
+    const titleFont = "bold 22px Lucida Console";
+
+    // El ancho del recuadro se ajusta al texto más largo (más 16 px de margen a cada lado).
+    ctx.font = labelFont;
+    const labelWidth = ctx.measureText(label).width;
+    ctx.font = titleFont;
+    const titleWidth = ctx.measureText(world.title).width;
+    const width = Math.ceil(Math.max(labelWidth, titleWidth)) + 32;
+
+    if (x < -width - 40 || x > WIDTH + 120) {
       return;
     }
 
     ctx.fillStyle = "rgba(10, 21, 41, 0.78)";
-    ctx.fillRect(x, 86, 236, 68);
+    ctx.fillRect(x, 86, width, 68);
     ctx.fillStyle = "#fff0bf";
-    ctx.fillRect(x, 86, 236, 4);
+    ctx.fillRect(x, 86, width, 4);
     ctx.fillStyle = "#39d1cb";
-    ctx.fillRect(x, 150, 236, 4);
+    ctx.fillRect(x, 150, width, 4);
     ctx.fillStyle = "#ffe39c";
-    ctx.font = "bold 18px Lucida Console";
-    ctx.fillText(`WORLD ${world.order}`, x + 16, 112);
+    ctx.font = labelFont;
+    ctx.fillText(label, x + 16, 112);
     ctx.fillStyle = "#fff7df";
-    ctx.font = "bold 22px Lucida Console";
+    ctx.font = titleFont;
     ctx.fillText(world.title, x + 16, 138);
   });
 }
@@ -1188,7 +1195,7 @@ function drawCheckpoints() {
     ctx.fillRect(x + 24, checkpoint.y + 12, 44, 18);
     ctx.fillStyle = "#fff0bf";
     ctx.font = "bold 18px Lucida Console";
-    ctx.fillText(String(checkpoint.index), x + 38, checkpoint.y + 28);
+    ctx.fillText(String(checkpoint.index + 1), x + 38, checkpoint.y + 28);
   });
 }
 
